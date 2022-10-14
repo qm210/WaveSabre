@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.11)
+
 project("WaveSabre" LANGUAGES C CXX CSharp)
 
 # Enable C# Utilities also for the VS2013 AppVeyor stage.
@@ -9,7 +11,6 @@ set(CMAKE_CSharp_FLAGS "/langversion:latest ")
 
 find_package(Git REQUIRED)
 
-cmake_minimum_required(VERSION 3.11)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 if(MSVC)
