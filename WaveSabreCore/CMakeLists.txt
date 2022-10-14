@@ -21,6 +21,7 @@ add_library(WaveSabreCore
 	include/WaveSabreCore/ResampleBuffer.h
 	include/WaveSabreCore/SamplePlayer.h
 	include/WaveSabreCore/Scissor.h
+    include/WaveSabreCore/Screwdriver.h
 	include/WaveSabreCore/Slaughter.h
 	include/WaveSabreCore/Smasher.h
 	include/WaveSabreCore/Specimen.h
@@ -49,6 +50,7 @@ add_library(WaveSabreCore
 	src/ResampleBuffer.cpp
 	src/SamplePlayer.cpp
 	src/Scissor.cpp
+    src/Screwdriver.cpp
 	src/Slaughter.cpp
 	src/Smasher.cpp
 	src/Specimen.cpp

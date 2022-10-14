@@ -24,7 +24,8 @@ namespace WaveSabrePlayerLib
 			Twister,
 			Cathedral,
 			Adultery,
-			Specimen
+			Specimen,
+            Screwdriver
 		};
 
 		typedef WaveSabreCore::Device *(*DeviceFactory)(DeviceId);
@@ -89,7 +90,7 @@ namespace WaveSabrePlayerLib
 
 			Track(SongRenderer *songRenderer, DeviceFactory factory);
 			~Track();
-			
+
 			void Run(int numSamples);
 
 		private:
@@ -172,7 +173,7 @@ namespace WaveSabrePlayerLib
 		int bpm;
 		int sampleRate;
 		double length;
-	
+
 		int numDevices;
 		WaveSabreCore::Device **devices;
 

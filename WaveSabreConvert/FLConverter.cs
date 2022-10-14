@@ -38,7 +38,7 @@ namespace WaveSabreConvert
         {
             this.logger = logger;
             this.project = project;
-            
+
             var song = new Song();
 
             song.Tempo = (int) project.Tempo;
@@ -170,7 +170,7 @@ namespace WaveSabreConvert
                     if (sabreDevice == null)
                     {
                         logger.WriteLine("WARNING: {0} slot {1} has unkown plugin {2}",
-                            trackName, 
+                            trackName,
                             i,
                             slot.Plugin.Name);
                     }
@@ -402,9 +402,9 @@ namespace WaveSabreConvert
                                     var autoPosition = currentPosition;
 
                                     // ensure previous value persists between blocks
-                                    if (keyCount == 0)                          
+                                    if (keyCount == 0)
                                     {
-                                        if (newAuto.Points.Count > 0)           
+                                        if (newAuto.Points.Count > 0)
                                         {
                                             var lastAuto = newAuto.Points.LastOrDefault();
                                             newAuto.Points.Add(new Song.Point()
@@ -416,7 +416,7 @@ namespace WaveSabreConvert
                                     }
 
                                     // this key is before the clip block, skip it
-                                    if (autoPosition < startOffset)               
+                                    if (autoPosition < startOffset)
                                     {
                                         previousPosition = autoPosition;
                                         previousValue = key.Value;
@@ -424,7 +424,7 @@ namespace WaveSabreConvert
                                     }
 
                                     // this key is after the clip block, must be last one, process and stop
-                                    if (autoPosition > endOffset)               
+                                    if (autoPosition > endOffset)
                                     {
                                         newValue = previousValue - key.Value;
                                         newValue = newValue / (double)key.Position;
@@ -439,7 +439,7 @@ namespace WaveSabreConvert
                                     }
 
                                     // key is inside the clip block
-                                                 
+
                                     if (keyCount == 0 && autoPosition > startOffset)                   // position not 0 in clip, calculat start point
                                     {
                                         newValue = previousValue - key.Value;
@@ -535,7 +535,19 @@ namespace WaveSabreConvert
         private Song.Device PlugToDevice(Plugin plug)
         {
             if (plug.Name == null) return null;
-            var name = plug.Name.Replace("WaveSabre - ", "");
+            //var name = plug.Name.Replace("WaveSabre - ", "");
+            var name = plug.Name.Split('-').Last().Trim();
+
+            // this had to be hardcoded, because QM didn't realize that the plugin name will be mapped to Song.DeviceId...
+            // and also, that VST names can only have 32 letters. Then I renamed it, that's why there are two values now.
+            // I fucked up. don't judge.
+            if (name == "QM-trash - Screwdriv" || name == "QM-Screwdriver")
+            {
+                name = "Screwdriver";
+            }
+
+            logger.WriteLine("PlugToDevice: plug.Name {0} -> name {1}", plug.Name, name);
+
             Song.Device device = null;
 
             Song.DeviceId deviceId;
@@ -545,6 +557,8 @@ namespace WaveSabreConvert
                 device.Id = deviceId;
                 device.Chunk = plug.State.Skip(21).ToArray();
             }
+
+            logger.WriteLine("PlugToDevice: deviceId now... {0} ", device.Id);
 
             return (device);
         }

@@ -14,6 +14,7 @@
 #include "Chamber.h"
 #include "Twister.h"
 #include "Cathedral.h"
+#include "Screwdriver.h"
 
 #include "Deprecated/Thunder.h"
 
