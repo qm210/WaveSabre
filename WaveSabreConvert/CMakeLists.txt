@@ -31,12 +31,7 @@ set(WAVESABRE_CONVERT_SOURCES
 )
 
 add_library(WaveSabreConvert SHARED ${WAVESABRE_CONVERT_SOURCES})
-set_property(TARGET WaveSabreConvert PROPERTY VS_DOTNET_REFERENCE_Monad.FLParser "${MONAD_FL_PARSER_BINARY}")
-if(${DOWNLOAD_MONAD_FL_PARSER})
-	add_dependencies(WaveSabreConvert FLParser)
-else()
-	add_dependencies(WaveSabreConvert Monad.FLParser)
-endif()
+add_dependencies(WaveSabreConvert Monad.FLParser)
 
 csharp_set_designer_cs_properties(${WAVESABRE_CONVERT_SOURCES})
 csharp_set_windows_forms_properties(${WAVESABRE_CONVERT_SOURCES})
