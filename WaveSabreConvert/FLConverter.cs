@@ -538,14 +538,6 @@ namespace WaveSabreConvert
             //var name = plug.Name.Replace("WaveSabre - ", "");
             var name = plug.Name.Split('-').Last().Trim();
 
-            // this had to be hardcoded, because QM didn't realize that the plugin name will be mapped to Song.DeviceId...
-            // and also, that VST names can only have 32 letters. Then I renamed it, that's why there are two values now.
-            // I fucked up. don't judge.
-            if (name == "QM-trash - Screwdriv" || name == "QM-Screwdriver")
-            {
-                name = "Screwdriver";
-            }
-
             logger.WriteLine("PlugToDevice: plug.Name {0} -> name {1}", plug.Name, name);
 
             Song.Device device = null;
